@@ -22,6 +22,16 @@ Evaluation of Hierarchical Clustering over Diverse Datasets:
 In this task, you will explore hierarchical clustering over different datasets. You will also evaluate different ways to merge clusters and good ways to find the cut-off point for breaking the dendrogram.
 """
 
+# Fill these two functions with code at this location. Do NOT move it. 
+# Change the arguments and return according to 
+# the question asked. 
+
+def fit_hierarchical_cluster():
+    return None
+
+def fit_modified():
+    return None
+
 
 def compute():
     answers = {}
@@ -34,8 +44,8 @@ def compute():
     # keys: 'nc', 'nm', 'bvv', 'add', 'b' (abbreviated datasets)
     dct = answers["4A: datasets"] = {}
 
-    # dct value:  the `fit_hierchical_cluster` function
-    dct = answers["4A: fit_hierarchical_cluster"] = lambda: None
+    # dct value:  the `fit_hierarchical_cluster` function
+    dct = answers["4A: fit_hierarchical_cluster"] = fit_hierarchical_cluster
 
     """
     B.	Apply your function from 4.A and make a plot similar to 1.C with the four linkage types (single, complete, ward, centroid: rows in the figure), and use 2 clusters for all runs. Compare the results to problem 1, specifically, are there any datasets that are now correctly clustered that k-means could not handle?
@@ -53,7 +63,7 @@ def compute():
     """
 
     # dct is the function described above in 4.C
-    dct = answers["4C: modified function"] = lambda: None
+    dct = answers["4A: modified function"] = fit_modified
 
     return answers
 

@@ -32,6 +32,14 @@ Comparison of Clustering Evaluation Metrics:
 In this task you will explore different methods to find a good value for k
 """
 
+# Fill this function with code at this location. Do NOT move it. 
+# Change the arguments and return according to 
+# the question asked. 
+
+def fit_kmeans():
+    return None
+
+
 
 def compute():
     # ---------------------
@@ -49,7 +57,7 @@ def compute():
     """
 
     # dct value: the `fit_kmeans` function
-    dct = answers["2B: fit_kmeans"] = lambda: None  # replace
+    dct = answers["2B: fit_kmeans"] = fit_kmeans
 
     """
     C.	Plot the SSE as a function of k for k=1,2,….,8, and choose the optimal k based on the elbow method.

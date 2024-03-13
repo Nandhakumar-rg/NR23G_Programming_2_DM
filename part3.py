@@ -22,6 +22,14 @@ Hierarchical Clustering:
 Recall from lecture that agglomerative hierarchical clustering is a greedy iterative scheme that creates clusters, i.e., distinct sets of indices of points, by gradually merging the sets based on some cluster dissimilarity (distance) measure. Since each iteration merges a set of indices there are at most n-1 mergers until the all the data points are merged into a single cluster (assuming n is the total points). This merging process of the sets of indices can be illustrated by a tree diagram called a dendrogram. Hence, agglomerative hierarchal clustering can be simply defined as a function that takes in a set of points and outputs the dendrogram.
 """
 
+# Fill this function with code at this location. Do NOT move it.
+# Change the arguments and return according to
+# the question asked.
+
+
+def data_index_function():
+    return None
+
 
 def compute():
     answers = {}
@@ -54,14 +62,15 @@ def compute():
     D.	Write a function that takes the data and the two index sets {I,J} above, and returns the dissimilarity given by single link clustering using the Euclidian distance metric. The function should output the same value as the 3rd column of the row found in problem 2.C.
     """
     # Answer type: a function defined above
-    answers["3D: function"] = lambda: None
+    answers["3D: function"] = data_index_function
 
     """
-    E.	In the actual algorithm, deciding which clusters to merge should consider all of the available clusters at each iteration. List all the clusters as index sets, e.g., {{0,1,2},{3,4},{5},{6},…},  that were available when the two clusters in part 2.D were merged.
+    E.	In the actual algorithm, deciding which clusters to merge should consider all of the available clusters at each iteration. List all the clusters as index sets, using a list of lists, 
+    e.g., [{0,1,2},{3,4},{5},{6},…],  that were available when the two clusters in part 2.D were merged.
     """
 
-    # List the clusters. the [[0,1,2], [3,4], [5], [6], ...} represents a list of lists.
-    answers["3E: clusters"] = [[0, 0], [0, 0]]
+    # List the clusters. the [{0,1,2}, {3,4}, {5}, {6}, ...] represents a list of lists.
+    answers["3E: clusters"] = [{0, 0}, {0, 0}]
 
     """
     F.	Single linked clustering is often criticized as producing clusters where “the rich get richer”, that is, where one cluster is continuously merging with all available points. Does your dendrogram illustrate this phenomenon?

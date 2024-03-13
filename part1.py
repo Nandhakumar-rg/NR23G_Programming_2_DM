@@ -25,6 +25,13 @@ Evaluation of k-Means over Diverse Datasets:
 In the first task, you will explore how k-Means perform on datasets with diverse structure.
 """
 
+# Fill this function with code at this location. Do NOT move it. 
+# Change the arguments and return according to 
+# the question asked. 
+
+def fit_kmeans():
+    return None
+
 
 def compute():
     answers = {}
@@ -34,7 +41,7 @@ def compute():
     """
 
     # Dictionary of 5 datasets. e.g., dct["nc"] = [data, labels]
-    # keys: 'nc', 'nm', 'bvv', 'add', 'b' (abbreviated datasets)
+    # 'nc', 'nm', 'bvv', 'add', 'b'. keys: 'nc', 'nm', 'bvv', 'add', 'b' (abbreviated datasets)
     dct = answers["1A: datasets"] = {}
 
     """
@@ -42,7 +49,8 @@ def compute():
     """
 
     # dct value:  the `fit_kmeans` function
-    dct = answers["1B: fit_kmeans"] = lambda: None
+    dct = answers["1B: fit_kmeans"] = fit_kmeans
+
 
     """
     C.	Make a big figure (4 rows x 5 columns) of scatter plots (where points are colored by predicted label) with each column corresponding to the datasets generated in part 1.A, and each row being k=[2,3,5,10] different number of clusters. For which datasets does k-means seem to produce correct clusters for (assuming the right number of k is specified) and for which datasets does k-means fail for all values of k? 
@@ -50,11 +58,13 @@ def compute():
     Create a pdf of the plots and return in your report. 
     """
 
-    # dct value: return a dictionary of the abbreviated dataset names (zero or more elements) and associated k-values with correct clusters. 
-    # key abbreviations: 'nc', 'nm', 'bvv', 'add', 'b'. The values are the set of k for which there is success. Only return datasets where the list of cluster size k is non-empty.
-    dct = answers["1C: cluster successes"] = {"xy": [4,3], "zx": [2]} 
+    # dct value: return a dictionary of one or more abbreviated dataset names (zero or more elements) 
+    # and associated k-values with correct clusters.  key abbreviations: 'nc', 'nm', 'bvv', 'add', 'b'. 
+    # The values are the list of k for which there is success. Only return datasets where the list of cluster size k is non-empty.
+    dct = answers["1C: cluster successes"] = {"xy": [3,4], "zx": [2]} 
 
-    # dct value: return a list of dataset abbreviations (list has zero or more elements, which are abbreviated dataset names as strings)
+    # dct value: return a list of 0 or more dataset abbreviations (list has zero or more elements, 
+    # which are abbreviated dataset names as strings)
     dct = answers["1C: cluster failures"] = ["xy"]
 
     """
