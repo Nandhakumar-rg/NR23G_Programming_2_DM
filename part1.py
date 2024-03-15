@@ -72,6 +72,7 @@ def compute():
             labels = fit_kmeans(dataset, k)
             kmeans_results[name][k] = (dataset[0], labels)  # Store tuple of data and labels for plotting
 
+    answers["1B: fit_kmeans"] = fit_kmeans
     # Assuming you will use myplt.plot_part1C to generate and save your plots for analysis
     # Example usage (you'll need to adjust based on your actual implementation):
     myplt.plot_part1C(kmeans_results, "kmeans_clusters.pdf")
