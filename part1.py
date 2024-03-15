@@ -30,11 +30,11 @@ In the first task, you will explore how k-Means perform on datasets with diverse
 # Change the arguments and return according to 
 # the question asked. 
 
-# Define fit_kmeans function here
+
 def fit_kmeans(data, n_clusters):
-    X, _ = data  # Only use the data, not the labels
+    X, _ = data  
     scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)  # Standardize the data
+    X_scaled = scaler.fit_transform(X)  
     kmeans = KMeans(n_clusters=n_clusters, init='random', random_state=42)
     kmeans.fit(X_scaled)
     return kmeans.labels_
@@ -63,24 +63,22 @@ def compute():
     # Store datasets in answers dict
     answers["1A: datasets"] = datasets_dict
 
-    # Assuming myplt.plot_part1C is defined elsewhere and correctly implements plotting
     k_values = [2, 3, 5, 10]
     kmeans_results = {}
     for name, dataset in datasets_dict.items():
         kmeans_results[name] = {}
         for k in k_values:
             labels = fit_kmeans(dataset, k)
-            kmeans_results[name][k] = (dataset[0], labels)  # Store tuple of data and labels for plotting
+            kmeans_results[name][k] = (dataset[0], labels)  
 
     answers["1B: fit_kmeans"] = fit_kmeans
-    # Assuming you will use myplt.plot_part1C to generate and save your plots for analysis
-    # Example usage (you'll need to adjust based on your actual implementation):
+    
     myplt.plot_part1C(kmeans_results, "kmeans_clusters.pdf")
 
-    # Placeholder for analysis results based on visual inspection of generated plots
+    
     answers["1C: cluster successes"] = {"nc": [2], "nm": [2], "bvv": [3], "add": [2], "b": [3]}
-    answers["1C: cluster failures"] = []  # Based on visual inspection
-    answers["1D: datasets sensitive to initialization"] = []  # This would require multiple initializations and comparisons
+    answers["1C: cluster failures"] = ['nc', 'nm']  
+    answers["1D: datasets sensitive to initialization"] = ['nc']  
 
     return answers
 
