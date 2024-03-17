@@ -4,13 +4,13 @@ import warnings
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import cluster, datasets, mixture
-from sklearn.datasets import make_blobs
+from sklearn.datasets import make_circles, make_moons, make_blobs
 from sklearn.neighbors import kneighbors_graph
 from sklearn.preprocessing import StandardScaler
 from itertools import cycle, islice
 import scipy.io as io
 from scipy.cluster.hierarchy import dendrogram, linkage  #
-
+from sklearn.cluster import KMeans
 # import plotly.figure_factory as ff
 import math
 from sklearn.cluster import AgglomerativeClustering
@@ -29,12 +29,30 @@ In the first task, you will explore how k-Means perform on datasets with diverse
 # Change the arguments and return according to 
 # the question asked. 
 
-def fit_kmeans():
-    return None
+def fit_kmeans(data, n_clusters):
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(data[0])  # Only scale the data, not the labels
+    kmeans = KMeans(n_clusters=n_clusters, init='random', random_state=42)
+    kmeans.fit(X_scaled)
+    return kmeans.labels_
 
 
 def compute():
     answers = {}
+    random_state = 42
+    n_samples = 100
+    # A. Load the datasets
+    datasets = {
+        'nc': make_circles(n_samples=n_samples, factor=.5, noise=.05, random_state=random_state),
+        'nm': make_moons(n_samples=n_samples, noise=.05, random_state=random_state),
+        'bvv': make_blobs(n_samples=n_samples, cluster_std=[1.0, 2.5, 0.5], random_state=random_state),
+        'add': make_blobs(n_samples=n_samples, random_state=random_state),
+        'b': make_blobs(n_samples=n_samples, random_state=random_state)
+    }
+    # Transform 'add' dataset to be anisotropic
+    transformation = [[0.6, -0.6], [-0.4, 0.8]]
+    datasets['add'] = (np.dot(datasets['add'][0], transformation), datasets['add'][1])
+    answers["1A: datasets"] = datasets
 
     """
     A.	Load the following 5 datasets with 100 samples each: noisy_circles (nc), noisy_moons (nm), blobs with varied variances (bvv), Anisotropicly distributed data (add), blobs (b). Use the parameters from (https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html), with any random state. (with random_state = 42). Not setting the correct random_state will prevent me from checking your results.
@@ -42,7 +60,13 @@ def compute():
 
     # Dictionary of 5 datasets. e.g., dct["nc"] = [data, labels]
     # 'nc', 'nm', 'bvv', 'add', 'b'. keys: 'nc', 'nm', 'bvv', 'add', 'b' (abbreviated datasets)
-    dct = answers["1A: datasets"] = {}
+    dct = answers["1A: datasets"] = {
+        'nc': make_circles(n_samples=n_samples, factor=.5, noise=.05, random_state=random_state),
+        'nm': make_moons(n_samples=n_samples, noise=.05, random_state=random_state),
+        'bvv': make_blobs(n_samples=n_samples, cluster_std=[1.0, 2.5, 0.5], random_state=random_state),
+        'add': make_blobs(n_samples=n_samples, random_state=random_state),
+        'b': make_blobs(n_samples=n_samples, random_state=random_state)
+    }
 
     """
    B. Write a function called fit_kmeans that takes dataset (before any processing on it), i.e., pair of (data, label) Numpy arrays, and the number of clusters as arguments, and returns the predicted labels from k-means clustering. Use the init='random' argument and make sure to standardize the data (see StandardScaler transform), prior to fitting the KMeans estimator. This is the function you will use in the following questions. 
