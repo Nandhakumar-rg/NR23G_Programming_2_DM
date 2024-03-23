@@ -37,7 +37,7 @@ def fit_kmeans(data, n_clusters):
 def compute():
     answers = {}
     
-    answers["1A: datasets"] = datasets
+    answers["1A: datasets"] = generate_datasets()
 
     # Part B: Modify the `fit_kmeans` signature and implement the functionality
 
