@@ -36,10 +36,16 @@ def fit_kmeans(data, n_clusters):
 
 def compute():
     answers = {}
-    
-    answers["1A: datasets"] = generate_datasets()
+    datasets = generate_datasets()
+    answers["1A: datasets"] = datasets
 
     # Part B: Modify the `fit_kmeans` signature and implement the functionality
+    def fit_kmeans(data, n_clusters):
+        scaler = StandardScaler()
+        data_scaled = scaler.fit_transform(data[0])  # Standardize the data
+        kmeans = KMeans(n_clusters=n_clusters, init='random', random_state=42)
+        kmeans.fit(data_scaled)
+        return kmeans.labels_
 
     answers["1B: fit_kmeans"] = fit_kmeans
 
