@@ -77,11 +77,11 @@ def compute():
 
     # Part 2B and 2C
     sse_values = compute_sse_for_ks(X)
-    answers["2B: fit_kmeans"] = fit_kmeans  # Storing function reference; actual usage in loop above
+    answers["2B: fit_kmeans"] = fit_kmeans  
     answers["2C: SSE plot"] = [[1,40.0],[2,3.81],[3,1.12],[4,0.42],[5,0.17],[6,0.12],[7,0.11],[8,0.06]]
     plot_metric(sse_values, "SSE", "SSE_plot.pdf")
 
-    # Part 2D - Since we used inertia directly for SSE, they are inherently the same for this task.
+    # Part 2D 
     plot_metric(sse_values, "Inertia", "Inertia_plot.pdf")
     answers["2D: inertia plot"] = [[1,40.0],[2,3.81],[3,1.12],[4,0.42],[5,0.17],[6,0.12],[7,0.11],[8,0.06]]
     answers["2D: do ks agree?"] = "yes"
