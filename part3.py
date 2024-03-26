@@ -46,8 +46,8 @@ def compute():
     answers["3B: linkage"] = Z
     plt.figure(figsize=(10, 7))
     dendrogram(Z)
-    plt.savefig('dendrogram.png')  # Saving the plot as an image
-    answers["3B: dendogram"] = "Dendrogram plotted and saved as 'dendrogram.png'"
+      # Saving the plot as an image
+    answers["3B: dendogram"] = plt.savefig('dendrogram.png')
 
     # C. Find the iteration where clusters {I={8,2,13}} and {J={1,9}} were merged
     # Assuming the solution involves manual inspection or a programmed approach
