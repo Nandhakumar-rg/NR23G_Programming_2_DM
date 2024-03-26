@@ -37,17 +37,18 @@ def compute():
     answers = {}
 
     # A. Load the dataset
-    mat = io.loadmat('hierarchical_toy_data.mat')
-    data = mat['X']  # Assuming the data is stored under the key 'X'
-    answers["3A: toy data"] = data
+    toy_data = io.loadmat('hierarchical_toy_data.mat')  # Adjust the path as necessary
+    answers["3A: toy data"] = toy_data
+
+    data = toy_data['X'] if 'X' in toy_data else toy_data[list(toy_data.keys())[-1]]
 
     # B. Create a linkage matrix and plot a dendrogram
     Z = linkage(data, method='single')
     answers["3B: linkage"] = Z
     plt.figure(figsize=(10, 7))
-    dendrogram(Z)
-      # Saving the plot as an image
-    answers["3B: dendogram"] = plt.savefig('dendrogram.png')
+    dendrogram_Z = dendrogram(Z)
+    plt.savefig('dendrogram.png')  # Consider specifying a direct path if needed
+    answers["3B: dendogram"] = dendrogram_Z
 
     # C. Find the iteration where clusters {I={8,2,13}} and {J={1,9}} were merged
     # Assuming the solution involves manual inspection or a programmed approach
