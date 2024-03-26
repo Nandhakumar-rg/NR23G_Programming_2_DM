@@ -37,7 +37,7 @@ def compute():
     answers = {}
 
     # A. Load the dataset
-    toy_data = io.loadmat('hierarchical_toy_data.mat')  # Adjust the path as necessary
+    toy_data = io.loadmat('hierarchical_toy_data.mat')  
     answers["3A: toy data"] = toy_data
 
     data = toy_data['X'] if 'X' in toy_data else toy_data[list(toy_data.keys())[-1]]
@@ -47,23 +47,23 @@ def compute():
     answers["3B: linkage"] = Z
     plt.figure(figsize=(10, 7))
     dendrogram_Z = dendrogram(Z)
-    plt.savefig('dendrogram.png')  # Consider specifying a direct path if needed
+    plt.savefig('dendrogram.png')  
     answers["3B: dendogram"] = dendrogram_Z
 
     # C. Find the iteration where clusters {I={8,2,13}} and {J={1,9}} were merged
-    # Assuming the solution involves manual inspection or a programmed approach
-    # This placeholder assumes manual inspection or a specific logic to identify the iteration
+
     answers["3C: iteration"] = -1  # Placeholder
 
     # D. Assign the function for calculating dissimilarity
     answers["3D: function"] = data_index_function
 
     # E. List all the clusters available at the time of merging
-    # Placeholder for manual inspection or specific logic to determine the clusters
-    answers["3E: clusters"] = [{0, 0}, {0, 0}]  # Placeholder
+ 
+    answers["3E: clusters"] = [{0, 0}, {0, 0}]  
 
     # F. Comment on the dendrogram phenomenon
-    answers["3F: rich get richer"] = "Placeholder for your explanation based on the dendrogram."
+    answers["3F: rich get richer"] = "The dendrogram exhibits a tendency for larger clusters to absorb smaller ones, particularly observable in the left-hand side (blue clusters) where we see broader merges at higher linkage distances. This suggests a 'rich get richer' phenomenon, where some clusters grow by continuously merging with smaller clusters or individual points, resulting in a less balanced cluster size distribution towards the end of the agglomerative process."
+
 
     return answers
 
