@@ -7,9 +7,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import cluster, datasets, mixture
 from sklearn.datasets import make_blobs, make_circles, make_moons
+from sklearn.neighbors import kneighbors_graph
 from sklearn.preprocessing import StandardScaler
+from itertools import cycle, islice
+import scipy.io as io
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from matplotlib.backends.backend_pdf import PdfPages
+
+# import plotly.figure_factory as ff
+import math
 from sklearn.cluster import AgglomerativeClustering
 import pickle
 import utils as u
