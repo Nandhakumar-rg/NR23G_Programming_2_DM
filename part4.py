@@ -1,18 +1,14 @@
-import os
-os.environ['OMP_NUM_THREADS'] = '1'
-
 import time
 import warnings
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import cluster, datasets, mixture
-from sklearn.datasets import make_blobs, make_circles, make_moons
+from sklearn.datasets import make_blobs
 from sklearn.neighbors import kneighbors_graph
 from sklearn.preprocessing import StandardScaler
 from itertools import cycle, islice
 import scipy.io as io
-from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
-from matplotlib.backends.backend_pdf import PdfPages
+from scipy.cluster.hierarchy import dendrogram, linkage  #
 
 # import plotly.figure_factory as ff
 import math
@@ -20,78 +16,61 @@ from sklearn.cluster import AgglomerativeClustering
 import pickle
 import utils as u
 
-def fit_hierarchical_cluster(data, linkage_type, n_clusters):
-    scaler = StandardScaler()
-    data_scaled = scaler.fit_transform(data)
-    model = AgglomerativeClustering(linkage=linkage_type, n_clusters=n_clusters)
-    model.fit(data_scaled)
-    return model.labels_
+"""
+Part 4.	
+Evaluation of Hierarchical Clustering over Diverse Datasets:
+In this task, you will explore hierarchical clustering over different datasets. You will also evaluate different ways to merge clusters and good ways to find the cut-off point for breaking the dendrogram.
+"""
 
-def fit_modified(data, method):
-    Z = linkage(data, method=method)
-    distances = Z[:, 2]
-    distance_differences = np.diff(distances)
-    max_diff_idx = np.argmax(distance_differences)
-    cut_off_distance = (distances[max_diff_idx] + distances[max_diff_idx + 1]) / 2
-    return Z, cut_off_distance
+# Fill these two functions with code at this location. Do NOT move it. 
+# Change the arguments and return according to 
+# the question asked. 
+
+def fit_hierarchical_cluster():
+    return None
+
+def fit_modified():
+    return None
+
 
 def compute():
     answers = {}
+
+    """
+    A.	Repeat parts 1.A and 1.B with hierarchical clustering. That is, write a function called fit_hierarchical_cluster (or something similar) that takes the dataset, the linkage type and the number of clusters, that trains an AgglomerativeClustering sklearn estimator and returns the label predictions. Apply the same standardization as in part 1.B. Use the default distance metric (euclidean) and the default linkage (ward).
+    """
+
+    # Dictionary of 5 datasets. e.g., dct["nc"] = [data, labels]
+    # keys: 'nc', 'nm', 'bvv', 'add', 'b' (abbreviated datasets)
     dct = answers["4A: datasets"] = {}
-    nc = make_circles(n_samples=100, factor=0.5, noise=0.05, random_state=42)
-    nm = make_moons(n_samples=100, noise=0.05, random_state=42)
-    bvv = make_blobs(n_samples=100, cluster_std=[1.0, 2.5, 0.5], random_state=42)
-    add = make_blobs(n_samples=100, random_state=42)
-    b = make_blobs(n_samples=100, random_state=42)
-    transformation = [[0.6, -0.6], [-0.4, 0.8]]
-    add = (np.dot(add[0], transformation), add[1])
-    answers["4A: datasets"] = {
-        'nc': nc,
-        'nm' : nm,
-        'bvv' : bvv,
-        'add' : add,
-        'b' : b
-    }
+
+    # dct value:  the `fit_hierarchical_cluster` function
     dct = answers["4A: fit_hierarchical_cluster"] = fit_hierarchical_cluster
-    datasets = answers["4A: datasets"]
-    linkage_methods = ['single', 'complete', 'ward', 'average']
-    clustering_outcomes = {}
-    plot_fig, plot_axes = plt.subplots(len(datasets), len(linkage_methods), figsize=(20, 15))
-    for dataset_idx, (name_of_dataset, (dataset_features, _)) in enumerate(datasets.items()):
-        norm_features = StandardScaler().fit_transform(dataset_features)
-        for linkage_idx, method in enumerate(linkage_methods):
-            cluster_labels = fit_hierarchical_cluster(norm_features, method, 2)
-            plot_axes[dataset_idx, linkage_idx].scatter(norm_features[:, 0], norm_features[:, 1], c=cluster_labels, s=50, cmap='viridis', edgecolors='k')
-            plot_axes[dataset_idx, linkage_idx].set_title(f'{name_of_dataset} - {method}')
-            if name_of_dataset not in clustering_outcomes:
-                clustering_outcomes[name_of_dataset] = {}
-            clustering_outcomes[name_of_dataset][method] = cluster_labels
-    plot_fig.tight_layout()
-    plot_fig.savefig('Hierarchical_Clustering_Results.pdf')
-    dct = answers["4B: cluster successes"] = ["nc", "nm"]
-    datasets = answers["4A: datasets"]
-    linkage_strategies = ['ward', 'complete', 'average', 'single']
-    with PdfPages('HierarchicalClustering_PartC_Plots.pdf') as pdf_book:
-        for name, (data, labels) in datasets.items():
-            normalizer = StandardScaler()
-            normalized_data = normalizer.fit_transform(data)
-            fig, axis = plt.subplots(1, len(linkage_strategies), figsize=(20, 5))
-            fig.suptitle(f'Cluster Analysis: {name}', fontsize=16)
-            for idx, strategy in enumerate(linkage_strategies):
-                linkage_matrix, optimal_cutoff = fit_modified(normalized_data, strategy)
-                identified_clusters = fcluster(linkage_matrix, optimal_cutoff, criterion='distance')
-                axis[idx].scatter(normalized_data[:, 0], normalized_data[:, 1], c=identified_clusters, cmap='viridis', edgecolors='k', s=50)
-                axis[idx].set_title(f"{name} using {strategy}")
-                axis[idx].set_xlabel('Dimension 1')
-                axis[idx].set_ylabel('Dimension 2')
-            plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-            pdf_book.savefig(fig)
-            plt.close()
-    dct = answers["4C: modified function"] = fit_modified
+
+    """
+    B.	Apply your function from 4.A and make a plot similar to 1.C with the four linkage types (single, complete, ward, centroid: rows in the figure), and use 2 clusters for all runs. Compare the results to problem 1, specifically, are there any datasets that are now correctly clustered that k-means could not handle?
+
+    Create a pdf of the plots and return in your report. 
+    """
+
+    # dct value: list of dataset abbreviations (see 1.C)
+    dct = answers["4B: cluster successes"] = [""]
+
+    """
+    C.	There are essentially two main ways to find the cut-off point for breaking the diagram: specifying the number of clusters and specifying a maximum distance. The latter is challenging to optimize for without knowing and/or directly visualizing the dendrogram, however, sometimes simple heuristics can work well. The main idea is that since the merging of big clusters usually happens when distances increase, we can assume that a large distance change between clusters means that they should stay distinct. Modify the function from part 1.A to calculate a cut-off distance before classification. Specifically, estimate the cut-off distance as the maximum rate of change of the distance between successive cluster merges (you can use the scipy.hierarchy.linkage function to calculate the linkage matrix with distances). Apply this technique to all the datasets and make a plot similar to part 4.B.
+    
+    Create a pdf of the plots and return in your report. 
+    """
+
+    # dct is the function described above in 4.C
+    dct = answers["4A: modified function"] = fit_modified
+
     return answers
 
-if __name__ == "__main__":
-   answers = compute()
 
-with open("part4.pkl", "wb") as f:
-    pickle.dump(answers, f)
+# ----------------------------------------------------------------------
+if __name__ == "__main__":
+    answers = compute()
+
+    with open("part4.pkl", "wb") as f:
+        pickle.dump(answers, f)
