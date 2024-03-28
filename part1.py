@@ -40,6 +40,7 @@ def compute():
     n_samples = 100
     noisy_circles = datasets.make_circles(n_samples=n_samples, factor=0.5, noise=0.05, random_state=42)
     noisy_moons = datasets.make_moons(n_samples=n_samples, noise=0.05, random_state=42)
+    b = make_blobs(n_samples=100, random_state=42)
     blobs_varied = datasets.make_blobs(n_samples=n_samples, cluster_std=[1.0, 2.5, 0.5], random_state=42)
     random_state = 170
     X, y = datasets.make_blobs(n_samples=n_samples, random_state=random_state)
@@ -51,6 +52,7 @@ def compute():
     datasets_list = [
         (noisy_circles, 'nc'),
         (noisy_moons, 'nm'),
+        (b, 'b'),
         (blobs_varied, 'bvv'),
         (add, 'add'),
         (varied, 'v')
