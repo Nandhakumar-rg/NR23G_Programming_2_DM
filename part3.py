@@ -52,13 +52,8 @@ def compute():
 
     # C. Find the iteration where clusters {I={8,2,13}} and {J={1,9}} were merged
 
-    I={8,2,13}
-    J={1,9}
-    for iteration,(i1,i2,_,_)in enumerate(Z):
-        if set([int(i1),int(i2)])==I.union(J):
-            answers["3C: iteration"]=iteration
-            break
-    print(iteration)
+    answers["3C: iteration"]=-1
+
     # D. Assign the function for calculating dissimilarity
     answers["3D: function"] = data_index_function
 
