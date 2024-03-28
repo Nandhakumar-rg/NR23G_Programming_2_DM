@@ -19,7 +19,7 @@ def fit_kmeans(data, n_clusters):
 
 def plot_sse(sse_list, title, file_name):
     # Plots the SSE (inertia) for a range of k values
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(8, 6))
     ks = range(1, len(sse_list) + 1)
     plt.plot(ks, sse_list, '-o')
     plt.title(title)
