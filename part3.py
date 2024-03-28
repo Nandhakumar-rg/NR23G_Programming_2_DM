@@ -54,9 +54,9 @@ def compute():
 
     I={8,2,13}
     J={1,9}
-    for i,(i1,i2,_,_)in enumerate(Z):
+    for iteration,(i1,i2,_,_)in enumerate(Z):
         if set([int(i1),int(i2)])==I.union(J):
-            answers["3C: iteration"]=i
+            answers["3C: iteration"]=iteration
             break
 
     # D. Assign the function for calculating dissimilarity
