@@ -58,7 +58,7 @@ def compute():
         if set([int(i1),int(i2)])==I.union(J):
             answers["3C: iteration"]=iteration
             break
-
+    print(iteration)
     # D. Assign the function for calculating dissimilarity
     answers["3D: function"] = data_index_function
 
